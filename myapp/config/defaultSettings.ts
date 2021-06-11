@@ -14,9 +14,9 @@ const proSettings: DefaultSettings = {
   fixSiderbar: true,
   colorWeak: false,
   menu: {
-    locale: true,
+    locale: false,
   },
-  title: 'Ant Design Pro',
+  title: 'HLDesign',
   pwa: false,
   iconfontUrl: '',
 };

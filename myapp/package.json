@@ -5,7 +5,7 @@
   "description": "An out-of-box UI solution for enterprise applications",
   "scripts": {
     "analyze": "cross-env ANALYZE=1 umi build",
-    "build": "umi build",
+    "build": "umi build && HLDesign",
     "deploy": "npm run site && npm run gh-pages",
     "dev": "npm run start:dev",
     "fetch:blocks": "pro fetch-blocks && npm run prettier",
@@ -19,7 +19,7 @@
     "lint:prettier": "prettier --check \"src/**/*\" --end-of-line auto",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
     "precommit": "lint-staged",
-    "prettier": "prettier -c --write \"src/**/*\"",
+    "prettier": "prettier -c --write \"src/**/*\"", 
     "start": "umi dev",
     "start:dev": "cross-env REACT_APP_ENV=dev MOCK=none umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
@@ -35,17 +35,27 @@
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
     "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
-    "**/*.{js,jsx,tsx,ts,less,md,json}": ["prettier --write"]
+    "**/*.{js,jsx,tsx,ts,less,md,json}": [
+      "prettier --write"
+    ]
   },
-  "browserslist": ["> 1%", "last 2 versions", "not ie <= 10"],
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ],
   "dependencies": {
     "@ant-design/icons": "^4.0.0",
     "@ant-design/pro-descriptions": "^1.0.16",
     "@ant-design/pro-layout": "^6.4.16",
     "@ant-design/pro-table": "^2.7.2",
+    "@brickd/react": "^1.0.0-alpha.16",
+    "@brickd/react-web": "^1.0.0-alpha.16",
     "@umijs/route-utils": "^1.0.32",
     "antd": "^4.6.3",
     "classnames": "^2.2.6",
+    "codemirror": "^5.59.2",
+    "hltautils": "^1.0.0",
     "lodash": "^4.17.11",
     "moment": "^2.25.3",
     "omit.js": "^2.0.2",
@@ -92,7 +102,9 @@
     "stylelint": "^13.0.0",
     "typescript": "^3.9.7"
   },
-  "engines": { "node": ">=10.0.0" },
+  "engines": {
+    "node": ">=10.0.0"
+  },
   "checkFiles": [
     "src/**/*.js*",
     "src/**/*.ts*",

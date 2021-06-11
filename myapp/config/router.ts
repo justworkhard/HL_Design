@@ -11,6 +11,12 @@ const routes = [
         ],
     },
     {
+        name: '记忆大师',
+        path: '/memoryH5',
+        component: './memoryH5',
+        layout: false,
+    },
+    {
         path: '/',
         component: '../layouts/SecurityLayout',
         routes: [
@@ -31,7 +37,7 @@ const routes = [
                     },
                     {
                         name: '组件管理',
-                        icon: 'table',
+                        icon: 'AlignCenterOutlined',
                         path: '/components',
                         routes: [
                             {
@@ -51,12 +57,92 @@ const routes = [
                                 icon: 'table',
                                 path: '/components/scrollContent',
                                 component: './components/scrollContent',
+                            },
+                            {
+                                name: 'suspendButton',
+                                icon: 'table',
+                                path: '/components/suspendButton',
+                                component: './components/suspendButton',
+                            },
+                        ]
+                    },
+                    {
+                        name: '监控平台',
+                        icon: 'RadarChartOutlined',
+                        path: '/endFontWatch',
+                        routes: [
+                            {
+                                name: '列表',
+                                icon: 'table',
+                                path: '/endFontWatch/index',
+                                component: './endFontWatch/index',
                             }
+                        ]
+                    },
+                    {
+                        name: '页面定制',
+                        icon: 'HighlightOutlined',
+                        path: '/pageSelf',
+                        routes: [
+                            {
+                                name: '页面定制',
+                                icon: 'table',
+                                path: '/pageSelf/index',
+                                component: './pageSelf/index',
+                            }
+                        ]
+                    },
+                    {
+                        name: '图床管理',
+                        icon: 'PictureOutlined',
+                        path: '/imgManage',
+                        routes: [
+                            {
+                                name: '图床管理',
+                                path: '/imgManage/index',
+                                component: './imgManage/index',
+                            }
+                        ]
+                    },
+                    {
+                        name: '工具类',
+                        icon: 'ToolOutlined',
+                        path: '/publicUtil',
+                        routes: [
+                            {
+                                name: '首页',
+                                path: '/publicUtil/index',
+                                component: './publicUtil/index',
+                            },
+                            {
+                                name: '精度计算',
+                                path: '/publicUtil/acount',
+                                component: './publicUtil/acount',
+                            },
+                            {
+                                name: '类型检查',
+                                path: '/publicUtil/check',
+                                component: './publicUtil/check',
+                            },
+                        ]
+                    },
+                    {
+                        name: '助手',
+                        icon: 'ToolOutlined',
+                        path: '/helper',
+                        routes: [
+                            {
+                                name: '专业英语',
+                                path: '/helper/english',
+                                component: './helper/english',
+                            },
+
                         ]
                     },
                     {
                         component: './404',
                     },
+
                 ],
             },
             {
@@ -67,5 +153,6 @@ const routes = [
     {
         component: './404',
     },
+
 ]
 export default routes

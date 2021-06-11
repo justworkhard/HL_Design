@@ -1,11 +1,13 @@
 import { Button, message, notification } from 'antd';
-
+import watch from './utils/watch'
 import React from 'react';
 import { useIntl } from 'umi';
 import defaultSettings from '../config/defaultSettings';
 
 const { pwa } = defaultSettings;
 const isHttps = document.location.protocol === 'https:';
+
+watch() 
 
 // if pwa is true
 if (pwa) {
@@ -57,7 +59,7 @@ if (pwa) {
       description: useIntl().formatMessage({ id: 'app.pwa.serviceworker.updated.hint' }),
       btn,
       key,
-      onClose: async () => {},
+      onClose: async () => { },
     });
   });
 } else if ('serviceWorker' in navigator && isHttps) {

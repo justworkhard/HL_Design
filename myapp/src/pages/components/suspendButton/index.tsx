@@ -2,7 +2,7 @@ import React from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import Api from '@/components/Api'
 import MobileCodeShow from '@/components/MobileCodeShow'
-import Cell from '@/outComponents/cell'
+import SuspendButton from '@/outComponents/suspendButton'
 
 function App() {
 
@@ -14,13 +14,11 @@ function App() {
   import Cell from '@/outComponents/cell'
   
   function App() {
-  
-   
     return (
       <PageContainer>
-  
-        <CodeShow code={code} showDemo={<Cell title='标题' value='值'></Cell>}></CodeShow>
-        <Api></Api>
+      <SuspendButton style={{ left: '90vw', top: '70vh' }}>
+         <p style={{ backgroundColor: '#000', height: '60px', width: "60px" }}>test</p>
+      </SuspendButton>
       </PageContainer>
     )
   }
@@ -28,31 +26,26 @@ function App() {
   export default App `
   const dataSource = [
     {
-      param: 'title',
-      desc: '左边标题',
-      type: "string",
+      param: 'style',
+      desc: 'css样式',
+      type: "CSSProperties",
       default: 'null',
     },
     {
-      param: 'value',
-      desc: '右边值',
-      type: "string",
+      param: 'children',
+      desc: '展示内容',
+      type: "ReactChild",
       default: 'null',
-    },
-    {
-      param: 'ifIcon',
-      desc: '右边小图标',
-      type: "boolean",
-      default: 'true',
-    },
+    }
   ]
   return (
     <PageContainer>
-      <MobileCodeShow code={code} showDemo={ 
+      <h2>可拖拽悬浮吸边按钮</h2>
+      <MobileCodeShow code={code} showDemo={
         <div>
-          <Cell title='标题' value='值'></Cell>
-          <Cell title='标题' value='值'></Cell>
-          <Cell title='标题' value='值'></Cell>
+          <SuspendButton style={{ left: '90vw', top: '70vh' }}>
+            <p style={{ backgroundColor: '#000', height: '80px', width: "80px", color: '#fff' }}>切换成移动模式体验</p>
+          </SuspendButton>
         </div>
       }></MobileCodeShow>
       <Api dataSource={dataSource}></Api>

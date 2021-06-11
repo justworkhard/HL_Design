@@ -51,6 +51,30 @@ const errorHandler = (error: { response: Response }): Response => {
 const request = extend({
   errorHandler, // 默认错误处理
   credentials: 'include', // 默认请求是否带上cookie
+  headers: {
+    'x-csrf-token': getCookie("csrfToken")
+  },
 });
+
+// // request拦截器, 改变url 或 options.
+// request.use(async (url, options) => {
+  
+//   return (
+//     {
+//       options: { ...options, 'x-csrf-token': getCookie("csrfToken") },
+//     }
+//   );
+// })
+
+// 封装获取 cookie 的方法
+function getCookie(name: string) {
+  
+  var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+  if (arr = document.cookie.match(reg))
+    return unescape(arr[2]);
+  else
+    return null;
+}
+
 
 export default request;

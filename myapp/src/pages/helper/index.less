@@ -1,0 +1,26 @@
+.wordCell {
+  display: flex;
+  padding: 10px 30px;
+  font-size: 18px;
+  align-items: center;
+  justify-content: space-between;
+  span{
+      margin-right: 30px;
+  }
+  .text{
+    width: 150px;
+  }
+  .answer{
+    //   background-color: #fff;
+      min-width: 100px;
+      height: 40px;
+      border: 1px dashed #666;
+  }
+  &:nth-child(2n) {
+    background-color: #f0f0f0;
+  }
+
+  &:nth-child(2n+1) {
+    background-color: #fff;
+  }
+}
