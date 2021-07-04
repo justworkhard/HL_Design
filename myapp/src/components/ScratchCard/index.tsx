@@ -1,29 +1,50 @@
-import React, { useEffect, useState, useRef } from 'react'
-import { connect } from 'umi';
+import React, { useEffect, useState, useRef, forwardRef, useImperativeHandle } from 'react'
 import styles from './index.less'
 
-function App(props: any) {
+function App(props: any, acatRef: any) {
     const { translate } = props
     const [canvasOffsetX, setcanvasOffsetX] = useState(0)
     const [canvasOffsetY, setcanvasOffsetY] = useState(0)
     const [ifDown, setIfDown] = useState(false)
     const myCanvas = useRef<any>(null);
     const [ctx, setCtx] = useState()
+    const [c, setC] = useState()
 
+
+    useImperativeHandle(acatRef, () => (
+        {
+            initCanvas: init
+        }
+    ))
 
     useEffect(() => {
-        console.log('myCanvas', myCanvas.current);
-
-        let c = myCanvas.current
-        let tempCtx = c.getContext("2d")
+        let tempC = myCanvas.current
+        let tempCtx = tempC.getContext("2d")
+        // tempCtx.clearRect(0, 0, c.width, c.height)
         setCtx(tempCtx)
-        setcanvasOffsetX(c.getBoundingClientRect().left)
-        setcanvasOffsetY(c.getBoundingClientRect().top)
+        setC(tempC)
+        setcanvasOffsetX(tempC.getBoundingClientRect().left)
+        setcanvasOffsetY(tempC.getBoundingClientRect().top)
 
         tempCtx.fillStyle = 'gray';
-        tempCtx.fillRect(0, 0, 100, 40);
-        tempCtx.globalCompositeOperation = 'destination-out';
+        tempCtx.fillRect(0, 0, tempC.width, tempC.height);
+        // tempCtx.globalCompositeOperation = 'destination-out';
+
     }, [])
+
+    function init() {
+        console.log('init');
+
+        // tempCtx.clearRect(0, 0, c.width, c.height)
+        // setCtx(tempCtx)
+        // ctx.clearRect(0, 0, c.width, c.height)
+        // ctx.fillStyle = 'gray';
+        // ctx.fillRect(0, 0, c.width, c.height);
+        // ctx.globalCompositeOperation = 'destination-out';
+        ctx.fillStyle = 'gray';
+        ctx.fillRect(0, 0, c.width, c.height);
+        // ctx.globalCompositeOperation = 'destination-out';
+    }
     function onMouseDown(e: any) {
         setIfDown(true)
     }
@@ -38,27 +59,41 @@ function App(props: any) {
         if (e.changedTouches) {
             e = e.changedTouches[0];
         }
+        // console.log(e, e.clientX, '====');
 
-        var x = (+ document.body.scrollLeft || e.pageX) - canvasOffsetX || 0,
-            y = (e.clientY + document.body.scrollTop || e.pageY) - canvasOffsetY || 0;
-        ctx.beginPath();
-        ctx.arc(x, y, 20, 0, Math.PI * 2);
-        ctx.fill();
+        var x = (e.clientX + document.body.scrollLeft || e.pageX) - canvasOffsetX || 0,
+            y = (e.clientY || document.body.scrollTop || e.pageY) - canvasOffsetY || 0;
+        console.log(x, );
+
+        ctx.clearRect(x - 10, (y / 2) - 10, 20, 20)
+        // ctx.clearRect(0, y / 2, 20, 20)
+        // ctx.clearRect(150, y / 2, 20, 20)
+        // ctx.clearRect(280, y / 2, 20, 20)
+
+        // ctx.clearRect(335, y / 2, 20, 20)
+
+
+        // return
+        // ctx.beginPath();
+
+        // ctx.arc(x, y / 2, 20, 0, Math.PI * 2);
+        // ctx.fill();
     }
     return (
         <div className={styles.scatch}>
-            <span className={styles.text}>{translate}</span>
+            <span className={styles.text} style={{ height: '300px', width: '330px' }}>{translate}</span>
             <canvas
                 ref={myCanvas}
-                width="100" height="40"
+                style={{ height: '300px', width: '330px' }}
                 className={styles.canvas}
                 onMouseDown={onMouseDown}
                 onMouseUp={onMouseUp}
                 onMouseMove={onMouseMove}
+                onTouchStart={onMouseDown}
+                onTouchEnd={onMouseUp}
+                onTouchMove={onMouseMove}
             ></canvas>
         </div>
     )
 }
-export default connect(({ global }: any) => ({
-    loading: global.loading,
-}))(App);
+export default forwardRef(App)

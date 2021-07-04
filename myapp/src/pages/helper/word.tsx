@@ -17,7 +17,6 @@ function DesignPanel(props: any) {
       </span>
       <div>
         <QuestionOutlined onClick={() => {
-          console.log(wordId);
           forgetWord({
             wordId: wordId
           }).then(res => {

@@ -17,6 +17,24 @@ const routes = [
         layout: false,
     },
     {
+        name: '全部题库',
+        path: '/wordList',
+        component: './wordList',
+        layout: false,
+    },
+    {
+        name: '可忆首页',
+        path: '/memory',
+        component: './memory/index',
+        layout: false,
+    },
+    {
+        name: '笔记列表',
+        path: '/memory',
+        component: './memory/index',
+        layout: false,
+    },
+    {
         path: '/',
         component: '../layouts/SecurityLayout',
         routes: [
